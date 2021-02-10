@@ -1,0 +1,29 @@
+server:
+  port: 9000
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: ${service.api.base-path}${service.api.swagger-path}
+
+service:
+  api:
+    base-path: /services/student
+    swagger-path: /v2/api-docs
+
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password: sa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: true

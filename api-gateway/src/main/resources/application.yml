@@ -1,0 +1,53 @@
+server:
+  port: 8760
+
+
+keycloak:
+  enabled: true
+  bearer-only: false
+  ssl-required: external
+  auth-server-url: http://localhost:7080/auth
+  realm: realmTest
+  resource: clientTest
+  credentials:
+    secret: f1087111-2c88-4359-b2e9-3696ee6c21b2
+  security-constraints:
+    - authRoles:
+        - student
+      securityCollections:
+        - patterns:
+            - /services/student/*
+
+    - authRoles:
+        - swagger-ui
+      securityCollections:
+        - patterns:
+            - /swagger-ui.html
+
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+
+zuul:
+  routes:
+    student-service:
+      path: /services/student/**
+      servicesId: student-service
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+      params:
+        methods: POST , GET
+
+
+
+documentation:
+  baseurl: http://localhost
+  swagger:
+    services:
+      - name: student Service
+        url: ${documentation.baseurl}:8760/services/student/v2/api-docs
+        version: 1.0
+
+

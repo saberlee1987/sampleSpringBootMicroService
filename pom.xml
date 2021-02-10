@@ -11,5 +11,7 @@
 
         <modules>
             <module>service-registry</module>
+            <module>api-gateway</module>
+            <module>student-service</module>
         </modules>
 </project>
